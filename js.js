@@ -12,9 +12,9 @@ heart.addEventListener('click', () => {
     line.style.animationDelay = `${index * 1.2 + 0.3}s`;
   });
 
-  //setTimeout(() => {
+  setTimeout(() => {
     memesLink.style.display = 'block';
-  //}, 13000);
+  }, 13000);
 });
 
      const createHearts = () => {
