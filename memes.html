@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Смехобимба</title>
+<h1 style="justify-self: center; color: #530606;">Нажимай на экран!</h1>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffe4ec, #fff0f6);
+    height: 100vh;
+    cursor: pointer;
+    font-family: sans-serif;
+  }
+
+  .meme {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 12px;
+    user-select: none;
+    pointer-events: none;
+    animation: floatUp 2.5s ease-out forwards;
+  }
+
+  @keyframes floatUp {
+    from {
+      transform: translateY(0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-150px) scale(1.5) rotate(30deg);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  const images = [
+    'img/mem1.jpg', 
+    'img/mem2.jpg', 
+    'img/mem3.jpg', 
+    'img/mem4.jpg', 
+    'img/mem5.jpg',
+    'img/mem6.jpg',  
+    'img/mem7.jpg',
+    'img/mem8.jpg'
+  ];
+
+  const phrases = [
+    "Нежные мамы!", "Омагат?", "Тютютю!", "Ингиборга!", "Ай!", "Бу!", "Мяу!", "Мама наго","Волшебная пися", "Людмурочка", "Иван гомазик папка дети"
+];
+
+  document.addEventListener('click', e => {
+    const img = document.createElement('img');
+    img.src = images[Math.floor(Math.random() * images.length)];
+    img.classList.add('meme');
+    img.style.left = e.clientX - 40 + 'px';
+    img.style.top = e.clientY - 40 + 'px';
+    document.body.appendChild(img);
+
+    // 50% шанс, что картинка что-то скажет
+    if (Math.random() < 0.6) {
+      const text = phrases[Math.floor(Math.random() * phrases.length)];
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'ru-RU';
+      speechSynthesis.speak(utter);
+    }
+
+    setTimeout(() => img.remove(), 2500);
+  });
+</script>
+
+</body>
+</html>
